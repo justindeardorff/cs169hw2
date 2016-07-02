@@ -24,9 +24,10 @@ class HangpersonGame
       raise ArgumentError, "guess must be a single letter"
     end  
     
+    letter=letter.downcase
+    
     #if invalid, raise arg error and return false
     if (guesses.include? letter) || (wrong_guesses.include? letter)   #check if already guessed
-      raise ArgumentError, "you have already guessed this"
       return false
     end
     
