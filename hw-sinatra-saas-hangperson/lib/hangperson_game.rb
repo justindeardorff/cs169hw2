@@ -41,14 +41,27 @@ class HangpersonGame
   
   def word_with_guesses
     #returns string that displays hangperson word with guesses
-    #word.gsub(/^[#{guesses}]/, '-')
-    #word.tr('[^#{guesses}]', '-' )
+    display = @word
+    #reg = guesses.join('')
+    
+    if guesses==''
+      display=@word.tr('[a-z]', '-' )
+    else  
+      word.scan(/\w/).each_with_index do |c, index| 
+        if c !~ /[#{guesses}]/i
+          display[index] = '-'
+        end
+      end
+    end  
+      
+    return display
+    
   end  
   
   def check_win_or_lose
     if wrong_guesses.length>=7
       return :lose
-    elsif guesses.length==word.scan(/\w/).uniq.length
+    elsif guesses.length==@word.scan(/\w/).uniq.length
       return :win  
     else
       return :play
